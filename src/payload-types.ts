@@ -69,6 +69,8 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    'youtube-videos': YoutubeVideo;
+    channels: Channel;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -77,6 +79,8 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'youtube-videos': YoutubeVideosSelect<false> | YoutubeVideosSelect<true>;
+    channels: ChannelsSelect<false> | ChannelsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -158,6 +162,106 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "youtube-videos".
+ */
+export interface YoutubeVideo {
+  id: number;
+  title: string;
+  description: string;
+  /**
+   * The YouTube video ID (e.g., "Izd-SLokbPY")
+   */
+  youtubeId: string;
+  /**
+   * Video duration in format like "2:45:30"
+   */
+  duration: string;
+  category:
+    | 'Opening Ceremony'
+    | 'Cultural'
+    | 'Youth Event'
+    | 'Business'
+    | 'Conference'
+    | 'Awards'
+    | 'Political'
+    | 'Convention'
+    | 'Professional'
+    | 'Education'
+    | 'Awards Ceremony'
+    | 'Celebrity Interview'
+    | 'Movie Promotion'
+    | 'Beauty Pageant'
+    | 'Business Interview'
+    | 'Pageant'
+    | 'Entertainment'
+    | 'Music Festival'
+    | 'Comedy'
+    | 'Interview';
+  /**
+   * Scheduled time in 24-hour format (e.g., "09:00")
+   */
+  scheduledTime?: string | null;
+  /**
+   * Whether this video is active and should be displayed
+   */
+  isActive?: boolean | null;
+  /**
+   * Display order (lower numbers appear first)
+   */
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "channels".
+ */
+export interface Channel {
+  id: number;
+  name: string;
+  description: string;
+  /**
+   * Unique identifier for the channel (e.g., "tana-conference")
+   */
+  slug: string;
+  color: 'blue' | 'green' | 'pink' | 'indigo' | 'teal' | 'amber' | 'purple' | 'red';
+  /**
+   * Tailwind gradient classes (e.g., "from-blue-600 to-blue-800")
+   */
+  bgGradient: string;
+  /**
+   * Emoji icon for the channel
+   */
+  icon: string;
+  /**
+   * Is this a YouTube-based channel?
+   */
+  isYoutube?: boolean | null;
+  /**
+   * HLS stream URL (for non-YouTube channels)
+   */
+  streamUrl?: string | null;
+  /**
+   * Default YouTube video ID for this channel
+   */
+  youtubeVideoId?: string | null;
+  /**
+   * YouTube videos for this channel
+   */
+  youtubePlaylist?: (number | YoutubeVideo)[] | null;
+  /**
+   * Whether this channel is active and should be displayed
+   */
+  isActive?: boolean | null;
+  /**
+   * Display order (lower numbers appear first)
+   */
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -170,6 +274,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'youtube-videos';
+        value: number | YoutubeVideo;
+      } | null)
+    | ({
+        relationTo: 'channels';
+        value: number | Channel;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -252,6 +364,42 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "youtube-videos_select".
+ */
+export interface YoutubeVideosSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  youtubeId?: T;
+  duration?: T;
+  category?: T;
+  scheduledTime?: T;
+  isActive?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "channels_select".
+ */
+export interface ChannelsSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  slug?: T;
+  color?: T;
+  bgGradient?: T;
+  icon?: T;
+  isYoutube?: T;
+  streamUrl?: T;
+  youtubeVideoId?: T;
+  youtubePlaylist?: T;
+  isActive?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -1,4 +1,9 @@
-import * as migration_20250629_202637_initial from './20250629_202637_initial'
+import * as migration_20250629_202637_initial from './20250629_202637_initial';
+import * as migration_20250708_213848 from './20250708_213848';
+import * as migration_20250708_214643 from './20250708_214643';
+import * as migration_20250708_215138 from './20250708_215138';
+import * as migration_20250708_215237 from './20250708_215237';
+import * as migration_20250708_224648 from './20250708_224648';
 
 export const migrations = [
   {
@@ -6,4 +11,29 @@ export const migrations = [
     down: migration_20250629_202637_initial.down,
     name: '20250629_202637_initial',
   },
-]
+  {
+    up: migration_20250708_213848.up,
+    down: migration_20250708_213848.down,
+    name: '20250708_213848',
+  },
+  {
+    up: migration_20250708_214643.up,
+    down: migration_20250708_214643.down,
+    name: '20250708_214643',
+  },
+  {
+    up: migration_20250708_215138.up,
+    down: migration_20250708_215138.down,
+    name: '20250708_215138',
+  },
+  {
+    up: migration_20250708_215237.up,
+    down: migration_20250708_215237.down,
+    name: '20250708_215237',
+  },
+  {
+    up: migration_20250708_224648.up,
+    down: migration_20250708_224648.down,
+    name: '20250708_224648'
+  },
+];

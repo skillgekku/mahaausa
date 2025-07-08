@@ -12,6 +12,11 @@ const nextConfig = {
 
     return webpackConfig
   },
+  images: {
+    remotePatterns: [
+      new URL('https://raw.githubusercontent.com/skillgekku/media-assets/refs/heads/main/**'),
+    ],
+  },
 }
 
 export default withPayload(nextConfig, { devBundleServerPackages: false })
