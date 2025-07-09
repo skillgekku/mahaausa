@@ -186,15 +186,15 @@ export default function ConferenceCarousel({
   const getConferenceImage = (conferenceId: string) => {
     const imageMap = {
       'tana-conference':
-        'https://raw.githubusercontent.com/skillgekku/media-assets/refs/heads/main/tana-banner.png',
+        'https://raw.githubusercontent.com/skillgekku/media-assets/refs/heads/main/MAHAA%20USA%20PNG.png',
       'nats-conference':
-        'https://raw.githubusercontent.com/skillgekku/media-assets/refs/heads/main/NATS.jpeg',
+        'https://raw.githubusercontent.com/skillgekku/media-assets/refs/heads/main/MAHAA%20USA%20PNG.png',
       'political-events':
-        'https://raw.githubusercontent.com/skillgekku/media-assets/refs/heads/main/political-banner.png',
+        'https://raw.githubusercontent.com/skillgekku/media-assets/refs/heads/main/MAHAA%20USA%20PNG.png',
       'entertainment-events':
-        'https://raw.githubusercontent.com/skillgekku/media-assets/refs/heads/main/entertainment-banner.png',
+        'https://raw.githubusercontent.com/skillgekku/media-assets/refs/heads/main/MAHAA%20USA%20PNG.png',
       'awards-ceremonies':
-        'https://raw.githubusercontent.com/skillgekku/media-assets/refs/heads/main/AGFT%20logoTag.png',
+        'https://raw.githubusercontent.com/skillgekku/media-assets/refs/heads/main/MAHAA%20USA%20PNG.png',
     }
     return (
       imageMap[conferenceId as keyof typeof imageMap] ||

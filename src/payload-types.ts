@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     'youtube-videos': YoutubeVideo;
     channels: Channel;
+    'ad-banners': AdBanner;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -81,6 +82,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     'youtube-videos': YoutubeVideosSelect<false> | YoutubeVideosSelect<true>;
     channels: ChannelsSelect<false> | ChannelsSelect<true>;
+    'ad-banners': AdBannersSelect<false> | AdBannersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -261,6 +263,69 @@ export interface Channel {
   createdAt: string;
 }
 /**
+ * Manage rotating advertisement banners
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ad-banners".
+ */
+export interface AdBanner {
+  id: number;
+  /**
+   * The main title/heading for the ad banner
+   */
+  title: string;
+  /**
+   * Subtitle or description text for the ad banner
+   */
+  subtitle: string;
+  /**
+   * Logo image for the ad banner (recommended: 200x150px)
+   */
+  logo?: (number | null) | Media;
+  /**
+   * Alternative: Direct URL to logo image (used if no logo upload)
+   */
+  logoUrl?: string | null;
+  /**
+   * Optional: URL to redirect when banner is clicked
+   */
+  clickUrl?: string | null;
+  /**
+   * Whether this banner should be displayed in rotation
+   */
+  isActive?: boolean | null;
+  /**
+   * Order in which banners appear (lower numbers first)
+   */
+  displayOrder?: number | null;
+  /**
+   * Optional: Date when banner should start showing
+   */
+  startDate?: string | null;
+  /**
+   * Optional: Date when banner should stop showing
+   */
+  endDate?: string | null;
+  /**
+   * Target specific device types
+   */
+  targetAudience?: ('all' | 'mobile' | 'desktop' | 'tablet') | null;
+  /**
+   * Category for better organization
+   */
+  category?: ('financial' | 'events' | 'organizations' | 'general') | null;
+  /**
+   * Number of times this banner has been displayed
+   */
+  impressions?: number | null;
+  /**
+   * Number of times this banner has been clicked
+   */
+  clicks?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
@@ -282,6 +347,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'channels';
         value: number | Channel;
+      } | null)
+    | ({
+        relationTo: 'ad-banners';
+        value: number | AdBanner;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -398,6 +467,27 @@ export interface ChannelsSelect<T extends boolean = true> {
   youtubePlaylist?: T;
   isActive?: T;
   order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ad-banners_select".
+ */
+export interface AdBannersSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  logo?: T;
+  logoUrl?: T;
+  clickUrl?: T;
+  isActive?: T;
+  displayOrder?: T;
+  startDate?: T;
+  endDate?: T;
+  targetAudience?: T;
+  category?: T;
+  impressions?: T;
+  clicks?: T;
   updatedAt?: T;
   createdAt?: T;
 }

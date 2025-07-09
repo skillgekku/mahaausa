@@ -1,6 +1,7 @@
 'use client'
 
 import { useTheme } from '@/app/(frontend)/hooks/useTheme'
+import { SocialIcon } from 'react-social-icons'
 
 interface HeaderProps {
   onScheduleClick: () => void
@@ -66,6 +67,31 @@ export default function Header({ onScheduleClick, isPiPActive }: HeaderProps) {
             <div className="flex items-center space-x-2">
               <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
               <span className="text-sm font-medium">LIVE</span>
+              {/* Contact & Social */}
+              <div className="text-center md:text-right">
+                <div className="flex justify-center md:justify-end items-center space-x-3 mb-3">
+                  <SocialIcon
+                    url="https://www.facebook.com/MAHAUSA.LLC/"
+                    style={{ height: 32, width: 32 }}
+                    className="hover:scale-110 transition-transform"
+                  />
+                  <SocialIcon
+                    url="https://x.com/mahaausa"
+                    style={{ height: 32, width: 32 }}
+                    className="hover:scale-110 transition-transform"
+                  />
+                  <SocialIcon
+                    url="https://www.youtube.com/@mahaanewsusa"
+                    style={{ height: 32, width: 32 }}
+                    className="hover:scale-110 transition-transform"
+                  />
+                  <SocialIcon
+                    url="https://www.instagram.com/mahaausa/"
+                    style={{ height: 32, width: 32 }}
+                    className="hover:scale-110 transition-transform"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
