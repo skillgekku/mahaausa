@@ -10,6 +10,7 @@ import { Media } from './collections/Media'
 import { YouTubeVideos } from './collections/YouTubeVideos'
 import { Channels } from './collections/Channels'
 import { AdBanners } from './collections/Adbanners'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -30,6 +31,10 @@ export default buildConfig({
     pool: {
       connectionString: process.env.POSTGRES_URL || '',
     },
+    // Disable auto-sync in production for safety
+    push: process.env.NODE_ENV === 'development',
+    // Enable migrations in production
+    migrationDir: path.resolve(dirname, 'migrations'),
   }),
   plugins: [
     vercelBlobStorage({
@@ -39,4 +44,10 @@ export default buildConfig({
       token: process.env.BLOB_READ_WRITE_TOKEN || '',
     }),
   ],
+  // Production optimizations
+  onInit: async (payload) => {
+    if (process.env.NODE_ENV === 'production') {
+      payload.logger.info('🚀 Payload CMS initialized in production mode')
+    }
+  },
 })

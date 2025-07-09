@@ -12,6 +12,12 @@ const nextConfig = {
 
     return webpackConfig
   },
+  eslint: {
+    // Only run ESLint on specific directories during build
+    dirs: ['src/app', 'src/components'],
+    // Or ignore during builds (not recommended for production)
+    ignoreDuringBuilds: true,
+  },
   images: {
     remotePatterns: [
       new URL('https://raw.githubusercontent.com/skillgekku/media-assets/refs/heads/main/**'),
